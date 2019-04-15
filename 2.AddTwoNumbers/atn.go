@@ -5,14 +5,14 @@ import (
 	"strconv"
 )
 
-//LinkNode Definition for singly-linked list.
-type LinkNode struct {
+//ListNode Definition for singly-linked list.
+type ListNode struct {
 	Val  int
-	Next *LinkNode
+	Next *ListNode
 }
 
 //Sting the link
-func (t *LinkNode) Sting() string {
+func (t *ListNode) Sting() string {
 	res := ""
 	for {
 		res = fmt.Sprint(res, t.Val)
@@ -26,9 +26,10 @@ func (t *LinkNode) Sting() string {
 }
 
 //PrintLink the link
-func (t *LinkNode) PrintLink() {
+func (t *ListNode) PrintLink() {
 	for {
 		fmt.Printf("%d", t.Val)
+		//if (t.Next == nil) || t.Next == t {
 		if t.Next == nil {
 			break
 		} else {
@@ -40,8 +41,8 @@ func (t *LinkNode) PrintLink() {
 
 func main() {
 
-	l1 := makeSimpleLink(68712)
-	l2 := makeSimpleLink(789)
+	l1 := makeSimpleLink(10)
+	l2 := makeSimpleLink(11)
 
 	l1.PrintLink()
 	l2.PrintLink()
@@ -49,19 +50,47 @@ func main() {
 	l3 := AddTwoNumbers(l1, l2)
 	l3.PrintLink()
 
+	l1 = makeSimpleLink(0)
+	l2 = makeSimpleLink(0)
 	l1.PrintLink()
 	l2.PrintLink()
+	l3 = AddTwoNumbers(l1, l2)
+	l3.PrintLink()
+
+	l1 = makeSimpleLink(1)
+	l2 = makeSimpleLink(1)
+	l1.PrintLink()
+	l2.PrintLink()
+	l3 = AddTwoNumbers(l1, l2)
+	l3.PrintLink()
+
+	l1 = makeSimpleLink(122330)
+	l2 = makeSimpleLink(1)
+	l1.PrintLink()
+	l2.PrintLink()
+	l3 = AddTwoNumbers(l1, l2)
+	l3.PrintLink()
+
+	l1 = makeSimpleLink(5)
+	l2 = makeSimpleLink(5)
+	l1.PrintLink()
+	l2.PrintLink()
+	l3 = AddTwoNumbers(l1, l2)
+	l3.PrintLink()
+	// l1.PrintLink()
+	// l2.PrintLink()
 
 }
 
-func makeSimpleLink(num int) *LinkNode {
-	var root, p *LinkNode
+func makeSimpleLink(num int) *ListNode {
+	var root, p *ListNode
 	data := strconv.Itoa(num)
-	for i := len(data) - 1; i >= 0; i-- {
-		b := fmt.Sprintf("%c", data[i])
+	lenData := len(data)
+	for i := 0; i < lenData; i++ {
+		b := fmt.Sprintf("%c", data[lenData-1-i])
 		val, _ := strconv.Atoi(b)
-		tmpNode := LinkNode{Val: val, Next: nil}
-		if i == (len(data) - 1) {
+		tmpNode := ListNode{Val: val, Next: nil}
+		if i == 0 {
 			root = &tmpNode
 			p = &tmpNode
 		} else {
@@ -73,14 +102,15 @@ func makeSimpleLink(num int) *LinkNode {
 }
 
 //AddTwoNumbers , Add two nubmbers
-func AddTwoNumbers(tl1, tl2 *LinkNode) *LinkNode {
-	var root, p *LinkNode
+func AddTwoNumbers(tl1, tl2 *ListNode) *ListNode {
+	var root, p *ListNode
 	l1 := tl1
 	l2 := tl2
 	carryBit := 0
 	i := 0
+
 	for {
-		tmpNode := LinkNode{Val: 0, Next: nil}
+		tmpNode := ListNode{Val: 0, Next: nil}
 		if i == 0 {
 			root = &tmpNode
 			p = &tmpNode
@@ -94,8 +124,10 @@ func AddTwoNumbers(tl1, tl2 *LinkNode) *LinkNode {
 				tmpNode.Val = sum - 10
 				carryBit = 1
 			}
+
 			p.Next = &tmpNode
 			p = &tmpNode
+
 			l1 = l1.Next
 			l2 = l2.Next
 		} else if l1 != nil && l2 == nil {
@@ -128,6 +160,7 @@ func AddTwoNumbers(tl1, tl2 *LinkNode) *LinkNode {
 				p.Next = &tmpNode
 				p = &tmpNode
 			}
+			p.Next = nil
 			break
 		}
 		i++
