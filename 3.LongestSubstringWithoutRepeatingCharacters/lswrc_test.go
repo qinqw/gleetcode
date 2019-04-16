@@ -14,15 +14,23 @@ func TestLongestSubstringWithoutRepeatingCharacters(t *testing.T) {
 
 	s = "abcabcaa"
 	fmt.Println(LongestSubstringWithoutRepeatingCharacters(s))
+
+	s = " "
+	fmt.Println(LongestSubstringWithoutRepeatingCharacters(s))
+
+	s = ""
+	fmt.Println(LongestSubstringWithoutRepeatingCharacters(s))
 }
 
 // LongestSubstringWithoutRepeatingCharacters2 is find the substring
-func TestLongestSubstringWithoutRepeatingCharacters2(t *testing.T) {
+func TestlengthOfLongestSubstring(t *testing.T) {
 	s := "abdiwhusssaa"
-	fmt.Println(LongestSubstringWithoutRepeatingCharacters2(s))
+	fmt.Println(lengthOfLongestSubstring(s))
 	s = "aaaaaa"
-	fmt.Println(LongestSubstringWithoutRepeatingCharacters2(s))
+	fmt.Println(lengthOfLongestSubstring(s))
 
 	s = "abcabcaa"
-	fmt.Println(LongestSubstringWithoutRepeatingCharacters2(s))
+	fmt.Println(lengthOfLongestSubstring(s))
+	s = " "
+	fmt.Println(lengthOfLongestSubstring(s))
 }
