@@ -6,6 +6,26 @@ func main() {
 	target := 9
 	nums := []int{2, 7, 11, 18}
 	fmt.Printf("%v", TwoSum(nums, target))
+
+	target = 4
+	nums = []int{2, 2, 11, 18}
+	fmt.Printf("%v", TwoSum(nums, target))
+
+	target = 6
+	nums = []int{2, 3, 11, 3}
+	fmt.Printf("%v", TwoSum(nums, target))
+
+	target = 6
+	nums = []int{3, 3, 11}
+	fmt.Printf("%v", TwoSum(nums, target))
+
+	target = 6
+	nums = []int{3, 2, 4}
+	fmt.Printf("%v", TwoSum(nums, target))
+
+	target = 0
+	nums = []int{-3, 2, 3, 5}
+	fmt.Printf("%v", TwoSum(nums, target))
 }
 
 // TwoSum is
@@ -17,22 +37,31 @@ func main() {
 //  return [0, 1].
 func TwoSum(nums []int, target int) []int {
 	//var lmap map[int]int
+	var res []int
 	lmap := make(map[int]int)
+	tmpA := make([]int, 0)
 	var i, j int
 	for k, v := range nums {
-		if target <= v || 2*v == target {
-			continue
+		if target == 2*v {
+			tmpA = append(tmpA, k)
+		} else {
+			lmap[v] = k
 		}
-		lmap[v] = k
-		fmt.Println(k)
+
 	}
 	//fmt.Printf("%v\n", lmap)
-	for k := range lmap {
-		i = k
-		j = target - i
-		if _, ok := lmap[j]; ok {
-			break
+	if len(tmpA) > 1 {
+		res = []int{tmpA[0], tmpA[1]}
+	} else {
+		for k := range lmap {
+			i = k
+			j = target - i
+			if _, ok := lmap[j]; ok {
+				break
+			}
 		}
+		res = []int{lmap[i], lmap[j]}
 	}
-	return []int{lmap[i], lmap[j]}
+
+	return res
 }
