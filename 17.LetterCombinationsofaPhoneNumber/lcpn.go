@@ -20,24 +20,21 @@ func letterCombinations(digits string) []string {
 
 	lmap := []string{" ", "*", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"}
 	l := len(digits)
-	var dmap *map[string]byte
+	var dmap *[]string
 	for i := 0; i < l; i++ {
 		n, _ := strconv.Atoi(string(digits[i]))
-		t := map[string]byte{}
+		t := []string{}
 		for _, v := range lmap[n] {
 			if i == 0 {
-				t[string(v)] = 0
+				t = append(t, string(v))
 			} else {
-				for k2 := range *dmap {
-					t[k2+string(v)] = 0
+				for _, k2 := range *dmap {
+					t = append(t, k2+string(v))
 				}
 			}
 		}
 		dmap = &t
 	}
 
-	for k := range *dmap {
-		res = append(res, k)
-	}
-	return res
+	return *dmap
 }
