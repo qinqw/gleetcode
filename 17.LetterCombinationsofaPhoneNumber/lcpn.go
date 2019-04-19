@@ -23,13 +23,20 @@ func letterCombinations(digits string) []string {
 	var dmap *[]string
 	for i := 0; i < l; i++ {
 		n, _ := strconv.Atoi(string(digits[i]))
-		t := []string{}
-		for _, v := range lmap[n] {
+
+		var t []string
+		ll := len(lmap[n])
+		if i == 0 {
+			t = make([]string, ll)
+		} else {
+			t = make([]string, ll*len(*dmap))
+		}
+		for j := 0; j < ll; j++ {
 			if i == 0 {
-				t = append(t, string(v))
+				t[j] = string(lmap[n][j])
 			} else {
-				for _, k2 := range *dmap {
-					t = append(t, k2+string(v))
+				for i, k2 := range *dmap {
+					t[i*ll+j] = k2 + string(lmap[n][j])
 				}
 			}
 		}
