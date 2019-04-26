@@ -39,6 +39,25 @@ func (t *ListNode) PrintLink() {
 	fmt.Printf("\n")
 }
 
+func makeSimpleLink(num int) *ListNode {
+	var root, p *ListNode
+	data := strconv.Itoa(num)
+	lenData := len(data)
+	for i := 0; i < lenData; i++ {
+		b := fmt.Sprintf("%c", data[lenData-1-i])
+		val, _ := strconv.Atoi(b)
+		tmpNode := ListNode{Val: val, Next: nil}
+		if i == 0 {
+			root = &tmpNode
+			p = &tmpNode
+		} else {
+			p.Next = &tmpNode
+			p = &tmpNode
+		}
+	}
+	return root
+}
+
 func main() {
 
 	l1 := makeSimpleLink(10)
@@ -80,25 +99,6 @@ func main() {
 	// l1.PrintLink()
 	// l2.PrintLink()
 
-}
-
-func makeSimpleLink(num int) *ListNode {
-	var root, p *ListNode
-	data := strconv.Itoa(num)
-	lenData := len(data)
-	for i := 0; i < lenData; i++ {
-		b := fmt.Sprintf("%c", data[lenData-1-i])
-		val, _ := strconv.Atoi(b)
-		tmpNode := ListNode{Val: val, Next: nil}
-		if i == 0 {
-			root = &tmpNode
-			p = &tmpNode
-		} else {
-			p.Next = &tmpNode
-			p = &tmpNode
-		}
-	}
-	return root
 }
 
 //AddTwoNumbers , Add two nubmbers
