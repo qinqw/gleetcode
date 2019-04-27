@@ -104,9 +104,6 @@ func mergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
 				l2 = l2.Next
 			}
 		}
-
-		// l1 = l1.Next
-		// l2 = l2.Next
 		i++
 	}
 	if l1 != nil {
