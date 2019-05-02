@@ -3,26 +3,15 @@ package main
 //MyCircularQueue is circular queue
 type MyCircularQueue struct {
 	queue []int
-	count int
+	caps  int
+	lens  int
 }
 
 // Constructor , Initialize your data structure here.
 // Set the size of the queue to be k.
 func Constructor(k int) MyCircularQueue {
-	return *NewMyCircularQueue(k)
-}
-
-// NewMyCircularQueue , Initialize your data structure here.
-// Set the size of the queue to be k.
-func NewMyCircularQueue(k int) *MyCircularQueue {
-	// res := MyCircularQueue{
-	// 	queue: []int{},
-	// 	count: k,
-	// }
-	//res.count = 3
-	return &MyCircularQueue{
-		queue: []int{},
-		count: k,
+	return MyCircularQueue{
+		caps: k,
 	}
 }
 
@@ -30,7 +19,8 @@ func NewMyCircularQueue(k int) *MyCircularQueue {
 // Return true if the operation is successful.
 func (h *MyCircularQueue) EnQueue(value int) bool {
 	res := false
-	if h.count < len(h.queue) {
+	if h.lens < h.caps {
+		h.lens++
 		h.queue = append(h.queue, value)
 		res = true
 	}
@@ -41,8 +31,9 @@ func (h *MyCircularQueue) EnQueue(value int) bool {
 //Return true if the operation is successful.
 func (h *MyCircularQueue) DeQueue() bool {
 	res := false
-	if h.count < len(h.queue) {
+	if h.lens > 0 {
 		h.queue = h.queue[1:]
+		h.lens--
 		res = true
 	}
 	return res
@@ -50,25 +41,26 @@ func (h *MyCircularQueue) DeQueue() bool {
 
 // Front , Get the front item from the queue.
 func (h *MyCircularQueue) Front() int {
-	return 0
+	return h.queue[0]
 }
 
 // Rear Get the last item from the queue.
 func (h *MyCircularQueue) Rear() int {
-	return len(h.queue) - 1
+	res := -1
+	if h.lens > 0 {
+		res = h.queue[h.lens-1]
+	}
+	return res
 }
 
 // IsEmpty , Checks whether the circular queue is empty or not. */
 func (h *MyCircularQueue) IsEmpty() bool {
-	// res := true {
-	// 	if len(h.queue)
-	// }
-	return (len(h.queue) > 0)
+	return h.lens == 0
 }
 
 // IsFull , Checks whether the circular queue is full or not.
 func (h *MyCircularQueue) IsFull() bool {
-	return len(h.queue) == h.count
+	return h.lens == h.caps
 }
 
 /**
