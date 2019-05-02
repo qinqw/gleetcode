@@ -3,13 +3,17 @@ package main
 import "fmt"
 
 func main() {
-	//fmt.Println(permute([]int{1}))
-	fmt.Println(permute([]int{1, 2, 3, 4}))
+	//fmt.Println(permute([]int{1, 2, 3, 4}))
+	fmt.Println(permute([]int{1, 1, 3}))
+}
 
+func permuteUnique(nums []int) [][]int {
+	//tmp := permute()
+	return permute(nums)
 }
 
 func permute(nums []int) [][]int {
-	var t1, t2 [][]int
+	var t1, t2, res [][]int
 	for i := 0; i < len(nums); i++ {
 		t2 = make([][]int, 0)
 		if i == 0 {
@@ -36,6 +40,13 @@ func permute(nums []int) [][]int {
 		}
 		t1 = t2
 	}
-	//res = t1
-	return t1
+	tmp := make(map[string]byte)
+	for i := 0; i < len(t1); i++ {
+		s := fmt.Sprintf("%v", t1[i])
+		if _, ok := tmp[s]; !ok {
+			res = append(res, t1[i])
+			tmp[s] = 1
+		}
+	}
+	return res
 }
